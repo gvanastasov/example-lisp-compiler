@@ -1,4 +1,5 @@
-const { TOKENS, tokenizer } = require('../../bin/compiler/tokenizer')
+const tokenizer = require('../../bin/compiler/tokenizer')
+const TOKENS = require('../../bin/compiler/tokens')
 
 test('generating tokens from raw string data', () => {
     // assign

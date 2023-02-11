@@ -1,34 +1,19 @@
 'use strict';
 
-const TOKENS = {
-    PARENTHESIS_OPEN: {
-        TYPE: 'parenthesis',
-        VALUE: '('
-    },
-    PARENTHESIS_CLOSE: {
-        TYPE: 'parenthesis',
-        VALUE: ')'
-    },
-    WHITESPACE: {
-        REGEX: /\s/
-    },
-    NUMBER: {
-        TYPE: 'number',
-        REGEX: /[0-9]/
-    },
-    OPERATION: {
-        TYPE: 'operation',
-        REGEX: /[a-z]/i
-    }
-}
+const TOKENS = require('./tokens')
 
 /**
  * Reads a raw string data and generates tokens from it.
  * 
  * @param {String} input a valid LISP statement.
+ * 
  * @example
  * 
- * (add 2 (subtract 10 4))   =>   [{ type: 'paren', value: '(' }, ...]
+ *      IN:
+ *          (add 2 (subtract 10 4)) 
+ *      
+ *      OUT:
+ *          [{ type: 'parenthesis', value: '(' }, ...]
  */
 function tokenizer(input) {
     let cursor = 0;
@@ -101,7 +86,4 @@ function tokenizer(input) {
     return tokens;
 }
 
-module.exports = {
-    TOKENS,
-    tokenizer
-}
+module.exports = tokenizer
