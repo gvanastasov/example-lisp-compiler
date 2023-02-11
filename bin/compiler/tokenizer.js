@@ -37,7 +37,7 @@ function tokenizer(input) {
     while (cursor < input.length) {
         let char = input[cursor];
 
-        // token: {
+        // token: (
         if (char === TOKENS.PARENTHESIS_OPEN.VALUE) {
             tokens.push({
                 type: TOKENS.PARENTHESIS_OPEN.TYPE,
@@ -47,7 +47,7 @@ function tokenizer(input) {
             continue;
         }
 
-        // token: }
+        // token: )
         if (char === TOKENS.PARENTHESIS_CLOSE.VALUE) {
             tokens.push({
                 type: TOKENS.PARENTHESIS_CLOSE.TYPE,
@@ -101,4 +101,7 @@ function tokenizer(input) {
     return tokens;
 }
 
-module.exports = tokenizer
+module.exports = {
+    TOKENS,
+    tokenizer
+}
