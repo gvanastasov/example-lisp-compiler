@@ -1,0 +1,12 @@
+{
+  "name": "example-lisp-compiler",
+  "version": "1.0.0",
+  "description": "A simple lisp compiler.",
+  "main": "bin/index.js",
+  "bin": {
+    "compile": "./bin/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
