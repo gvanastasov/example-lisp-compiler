@@ -60,9 +60,14 @@ function parser(tokens) {
             cursor++;
 
             while (
-                token.type !== TOKENS.PARENTHESIS_CLOSE.TYPE
+                token.type !== TOKENS.PARENTHESIS_OPEN.TYPE ||
+                (
+                    token.type === TOKENS.PARENTHESIS_CLOSE.TYPE &&
+                    token.value !== TOKENS.PARENTHESIS_CLOSE.VALUE
+                )
             ) {
-                node.params.push(walk());
+                const param = walk();
+                node.params.push(param);
                 token = tokens[cursor];
             }
 
@@ -71,8 +76,7 @@ function parser(tokens) {
             return node;
         }
 
-        // todo: improve error message
-        throw new TypeError(token.type);
+        throw new TypeError(`unknown token type '${token.type}'.`);
     }
 
     let ast = {
