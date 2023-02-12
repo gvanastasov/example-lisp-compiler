@@ -25,10 +25,10 @@ test('traverser applies visitor patter', () => {
     
     const visitor = {
         [NODE_TYPES.CALL_EXPRESSION]: {
-            enter(node, parent) { node.visited = true },
+            enter(node, _parent) { node.visited = true },
         },
         [NODE_TYPES.NUMBER_LITERAL]: {
-            enter(node, parent) { node.visited = true },
+            enter(node, _parent) { node.visited = true },
         }
     };
 
