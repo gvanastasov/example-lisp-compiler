@@ -23,12 +23,15 @@ test('traverser applies visitor patter', () => {
         ]
     };
     
+    const callExpressionEnterMock = jest.fn()
+    const numberLiteralEnterMock = jest.fn()
+
     const visitor = {
         [NODE_TYPES.CALL_EXPRESSION]: {
-            enter(node, _parent) { node.visited = true },
+            enter: callExpressionEnterMock,
         },
         [NODE_TYPES.NUMBER_LITERAL]: {
-            enter(node, _parent) { node.visited = true },
+            enter: numberLiteralEnterMock,
         }
     };
 
@@ -36,7 +39,6 @@ test('traverser applies visitor patter', () => {
     traverser(ast, visitor);
 
     // assert
-    expect(ast.body[0]).toHaveProperty('visited')
-    expect(ast.body[0].params[0]).toHaveProperty('visited')
-    expect(ast.body[0].params[1]).toHaveProperty('visited')
+    expect(callExpressionEnterMock).toHaveBeenCalledTimes(1)
+    expect(numberLiteralEnterMock).toHaveBeenCalledTimes(2)
 })
