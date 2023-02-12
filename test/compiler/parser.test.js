@@ -1,6 +1,6 @@
-const parser = require('../../bin/compiler/parser')
-const TOKENS = require('../../bin/compiler/tokens')
-const NODE_TYPES = require('../../bin/compiler/nodes')
+const parser = require('../../src/compiler/parser')
+const TOKENS = require('../../src/compiler/tokens')
+const NODE_TYPES = require('../../src/compiler/nodes')
 
 test('parsing tokens results in valid LISP ast', () => {
     // assign

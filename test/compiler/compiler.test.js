@@ -1,4 +1,4 @@
-const compiler = require('../../bin/index')
+const compiler = require('../../src/index')
 
 test('compiler works', () => {
     // assign

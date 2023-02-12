@@ -1,5 +1,5 @@
-const NODE_TYPES = require('../../bin/compiler/nodes')
-const traverser = require('../../bin/compiler/traverser')
+const NODE_TYPES = require('../../src/compiler/nodes')
+const traverser = require('../../src/compiler/traverser')
 
 test('traverser applies visitor patter', () => {
     // assign
