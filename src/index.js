@@ -1,15 +1,15 @@
-const tokenizer = require('./compiler/tokenizer')
-const parser = require('./compiler/parser')
-const transformer = require('./compiler/transformer')
-const generator = require('./compiler/generator')
+const tokenizer = require("./compiler/tokenizer");
+const parser = require("./compiler/parser");
+const transformer = require("./compiler/transformer");
+const generator = require("./compiler/generator");
 
 function compiler(input) {
-    let tokens = tokenizer(input);
-    let ast    = parser(tokens);
-    let newAst = transformer(ast);
-    let output = generator(newAst);
+  let tokens = tokenizer(input);
+  let ast = parser(tokens);
+  let newAst = transformer(ast);
+  let output = generator(newAst);
 
-    return output;
+  return output;
 }
 
-module.exports = compiler
+module.exports = compiler;

@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-const TOKENS = require('./tokens')
-const NODE_TYPES = require('./nodes')
+const TOKENS = require("./tokens");
+const NODE_TYPES = require("./nodes");
 
 /**
  * Generates ast (Abstract Syntax Tree) from tokens.
@@ -32,63 +32,61 @@ const NODE_TYPES = require('./nodes')
  *          }
  */
 function parser(tokens) {
-    let cursor = 0;
+  let cursor = 0;
 
-    function walk() {
-        let token = tokens[cursor];
+  function walk() {
+    let token = tokens[cursor];
 
-        // ast: NumberLiteral
-        if (token.type === TOKENS.NUMBER.TYPE) {
-            const node = {
-                type: NODE_TYPES.NUMBER_LITERAL,
-                value: token.value
-            }
-            cursor++;
-            return node;
-        }
-
-        // ast: CallExpression
-        if (token.type === TOKENS.PARENTHESIS_OPEN.TYPE) {
-            token = tokens[++cursor];
-
-            const node = {
-                type: NODE_TYPES.CALL_EXPRESSION,
-                name: token.value,
-                params: []
-            };
-
-            cursor++;
-
-            while (
-                token.type !== TOKENS.PARENTHESIS_OPEN.TYPE ||
-                (
-                    token.type === TOKENS.PARENTHESIS_CLOSE.TYPE &&
-                    token.value !== TOKENS.PARENTHESIS_CLOSE.VALUE
-                )
-            ) {
-                const param = walk();
-                node.params.push(param);
-                token = tokens[cursor];
-            }
-
-            cursor++;
-
-            return node;
-        }
-
-        throw new TypeError(`unknown token type '${token.type}'.`);
+    // ast: NumberLiteral
+    if (token.type === TOKENS.NUMBER.TYPE) {
+      const node = {
+        type: NODE_TYPES.NUMBER_LITERAL,
+        value: token.value,
+      };
+      cursor++;
+      return node;
     }
 
-    let ast = {
-        type: NODE_TYPES.PROGRAM,
-        body: []
-    };
+    // ast: CallExpression
+    if (token.type === TOKENS.PARENTHESIS_OPEN.TYPE) {
+      token = tokens[++cursor];
 
-    while (cursor < tokens.length) {
-        ast.body.push(walk());
+      const node = {
+        type: NODE_TYPES.CALL_EXPRESSION,
+        name: token.value,
+        params: [],
+      };
+
+      cursor++;
+
+      while (
+        token.type !== TOKENS.PARENTHESIS_OPEN.TYPE ||
+        (token.type === TOKENS.PARENTHESIS_CLOSE.TYPE &&
+          token.value !== TOKENS.PARENTHESIS_CLOSE.VALUE)
+      ) {
+        const param = walk();
+        node.params.push(param);
+        token = tokens[cursor];
+      }
+
+      cursor++;
+
+      return node;
     }
 
-    return ast;
+    throw new TypeError(`unknown token type '${token.type}'.`);
+  }
+
+  let ast = {
+    type: NODE_TYPES.PROGRAM,
+    body: [],
+  };
+
+  while (cursor < tokens.length) {
+    ast.body.push(walk());
+  }
+
+  return ast;
 }
 
 module.exports = parser;

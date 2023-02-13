@@ -1,12 +1,12 @@
-const compiler = require('../../src/index')
+const compiler = require("../../src/index");
 
-test('compiler works', () => {
-    // assign
-    const lispExpression = '(add 2 (subtract 3 1))';
+test("compiler works", () => {
+  // assign
+  const lispExpression = "(add 2 (subtract 3 1))";
 
-    // act
-    const result = compiler(lispExpression);
+  // act
+  const result = compiler(lispExpression);
 
-    // assert
-    expect(result).toBe('add(2, subtract(3, 1));')
+  // assert
+  expect(result).toBe("add(2, subtract(3, 1));");
 });
