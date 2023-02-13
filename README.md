@@ -1,4 +1,4 @@
-# **Example LISP compiler**
+# **Example Common LISP compiler**
 
 A simple example on a both runtime (and sdk) for compiling Common LISP to Javascript. Bear in mind this is jsut an example, therefore functionality is limited to only mark the basic architecture of a standard compiler solution.
 
