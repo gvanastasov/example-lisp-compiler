@@ -3,9 +3,9 @@
  * @description LISP language's formal grammar as a specification:
  * 
  *      program         => expression*
- *      expression      => call (other?) | literal
+ *      expression      => call | literal
  *      call            => "(" expression expression* ")"
- *      literal         => number (other?)
+ *      literal         => number
  * 
  */
 const NODE_TYPES = {
