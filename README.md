@@ -27,6 +27,7 @@ node . --run-time
 
 SDK
 ```sh
-# specify path to input for the compiler. Output will be written to subdir /__generated/ relateve to input path.
+# specify path to input for the compiler. Output will be written to
+# subdir /__generated/ relateve to input path.
 node . --generate ./path/to.cl
 ```
