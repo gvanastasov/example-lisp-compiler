@@ -1,4 +1,4 @@
-const NODE_TYPES = require("./nodes");
+const { CL_AST_NODE_TYPES } = require("./nodes");
 
 // visitor pattern
 function traverser(ast, visitor) {
@@ -16,15 +16,15 @@ function traverser(ast, visitor) {
     }
 
     switch (node.type) {
-      case NODE_TYPES.PROGRAM:
+      case CL_AST_NODE_TYPES.PROGRAM:
         traverseArray(node.body, node);
         break;
 
-      case NODE_TYPES.CALL_EXPRESSION:
+      case CL_AST_NODE_TYPES.CALL_EXPRESSION:
         traverseArray(node.params, node);
         break;
 
-      case NODE_TYPES.NUMBER_LITERAL:
+      case CL_AST_NODE_TYPES.NUMBER_LITERAL:
         break;
 
       default:

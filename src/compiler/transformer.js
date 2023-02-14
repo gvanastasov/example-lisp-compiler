@@ -1,5 +1,8 @@
 const traverser = require("./traverser");
-const NODE_TYPES = require("./nodes");
+const { 
+  CL_AST_NODE_TYPES,
+  JS_AST_NODE_TYPES 
+} = require("./nodes");
 
 /**
  * Transformer
@@ -9,28 +12,28 @@ const NODE_TYPES = require("./nodes");
  */
 function transformer(ast) {
   let newAst = {
-    type: NODE_TYPES.PROGRAM,
+    type: JS_AST_NODE_TYPES.PROGRAM,
     body: [],
   };
 
   ast._context = newAst.body;
 
   traverser(ast, {
-    [NODE_TYPES.NUMBER_LITERAL]: {
+    [CL_AST_NODE_TYPES.NUMBER_LITERAL]: {
       enter(node, parent) {
         parent._context.push({
-          type: "NumberLiteral",
+          type: JS_AST_NODE_TYPES.NUMBER_LITERAL,
           value: node.value,
         });
       },
     },
 
-    CallExpression: {
+    [CL_AST_NODE_TYPES.CALL_EXPRESSION]: {
       enter(node, parent) {
         let expression = {
-          type: "CallExpression",
+          type: JS_AST_NODE_TYPES.CALL_EXPRESSION,
           callee: {
-            type: "Identifier",
+            type: JS_AST_NODE_TYPES.IDENTIFIER,
             name: node.name,
           },
           arguments: [],
@@ -38,9 +41,9 @@ function transformer(ast) {
 
         node._context = expression.arguments;
 
-        if (parent.type !== "CallExpression") {
+        if (parent.type !== JS_AST_NODE_TYPES.CALL_EXPRESSION) {
           expression = {
-            type: "ExpressionStatement",
+            type: JS_AST_NODE_TYPES.EXPRESSION_STATEMENT,
             expression: expression,
           };
         }

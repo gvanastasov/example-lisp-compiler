@@ -1,7 +1,7 @@
 "use strict";
 
 const TOKENS = require("./tokens");
-const NODE_TYPES = require("./nodes");
+const { CL_AST_NODE_TYPES } = require("./nodes");
 
 /**
  * Generates ast (Abstract Syntax Tree) from tokens.
@@ -40,7 +40,7 @@ function parser(tokens) {
     // ast: NumberLiteral
     if (token.type === TOKENS.NUMBER.TYPE) {
       const node = {
-        type: NODE_TYPES.NUMBER_LITERAL,
+        type: CL_AST_NODE_TYPES.NUMBER_LITERAL,
         value: token.value,
       };
       cursor++;
@@ -52,7 +52,7 @@ function parser(tokens) {
       token = tokens[++cursor];
 
       const node = {
-        type: NODE_TYPES.CALL_EXPRESSION,
+        type: CL_AST_NODE_TYPES.CALL_EXPRESSION,
         name: token.value,
         params: [],
       };
@@ -78,7 +78,7 @@ function parser(tokens) {
   }
 
   let ast = {
-    type: NODE_TYPES.PROGRAM,
+    type: CL_AST_NODE_TYPES.PROGRAM,
     body: [],
   };
 

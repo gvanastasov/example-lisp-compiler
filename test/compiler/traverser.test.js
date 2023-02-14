@@ -1,21 +1,21 @@
-const NODE_TYPES = require("../../src/compiler/nodes");
+const { CL_AST_NODE_TYPES } = require("../../src/compiler/nodes");
 const traverser = require("../../src/compiler/traverser");
 
 test("traverser applies visitor patter", () => {
   // assign
   const ast = {
-    type: NODE_TYPES.PROGRAM,
+    type: CL_AST_NODE_TYPES.PROGRAM,
     body: [
       {
-        type: NODE_TYPES.CALL_EXPRESSION,
+        type: CL_AST_NODE_TYPES.CALL_EXPRESSION,
         name: "add",
         params: [
           {
-            type: NODE_TYPES.NUMBER_LITERAL,
+            type: CL_AST_NODE_TYPES.NUMBER_LITERAL,
             value: "2",
           },
           {
-            type: NODE_TYPES.NUMBER_LITERAL,
+            type: CL_AST_NODE_TYPES.NUMBER_LITERAL,
             value: "1",
           },
         ],
@@ -27,10 +27,10 @@ test("traverser applies visitor patter", () => {
   const numberLiteralEnterMock = jest.fn();
 
   const visitor = {
-    [NODE_TYPES.CALL_EXPRESSION]: {
+    [CL_AST_NODE_TYPES.CALL_EXPRESSION]: {
       enter: callExpressionEnterMock,
     },
-    [NODE_TYPES.NUMBER_LITERAL]: {
+    [CL_AST_NODE_TYPES.NUMBER_LITERAL]: {
       enter: numberLiteralEnterMock,
     },
   };
